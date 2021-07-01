@@ -17,21 +17,14 @@ feature "Affiliation's Customization" do
         visit('/sign-in')
         conehealth_user_login
         background_color = page.find(:xpath, '/html/body/div[4]').native.css_value('background')
-        if background_color = 'rgb(0, 153, 170)'
+        if background_color.include? 'rgb(0, 153, 170)'
             background_color = '#0099aa'
         end
         expect(background_color).to eq(primary_color)
     end
 
     scenario 'When Affiliation has logo added' do
-        #login aff manager
-        #search affiliation
-        #select actions
-        # ve onde ficam armazenadas as fotos
-        # salva valor de imagem em outra variavel ou faz validacao de imagem (pesquisar sobre)
-        # desloga
-        #login user
-        #expec(page) to have logo = to the same set in aff manager image
+       
     end
 
 
