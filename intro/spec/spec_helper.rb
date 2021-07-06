@@ -22,4 +22,5 @@ Capybara.default_max_wait_time = 20
 
 RSpec.configure do |config|
   config.formatter = :documentation
+  config.include Capybara::DSL
 end
