@@ -10,4 +10,12 @@ def login_aff_manager(email, password)
     click_on 'Log in'
 end
 
+def aff_manager_search(affiliation)
+    visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
+    aff_manager_admin_login
+    find(:xpath, '//*[@id="select-search"]/option[2]').click
+    fill_in('affiliation-search-field', with: affiliation)
+    click_on('Search')
+end
+
 

@@ -1,7 +1,6 @@
 require 'spec_helper'
 require_relative '../steps.rb'
 require_relative '../pws.rb'
-require 'dotenv/load'
 
 
 feature "Affiliation's Customization" do
