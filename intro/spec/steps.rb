@@ -19,3 +19,17 @@ def aff_manager_search(affiliation)
 end
 
 
+def eligible_members_endpoint
+    response = HTTP.post('https://stage-app.mdlive.com/qa/eligible_members', :json => {
+        "eligible_member": {
+          "first_name": first_name,
+          "last_name": last_name,
+          "birthdate": dob,
+          "gender": gender,
+          "zip": zip,
+          "affiliation_name": aff_name,
+          "unique_id": unique_id
+        }
+    })
+    p JSON.parse(response)
+end
