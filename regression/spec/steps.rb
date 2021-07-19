@@ -63,3 +63,15 @@ def generate_mock_270
     click_on('Submit')
 
 end
+
+def generate_mock_270_bcbsil
+    visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
+    aff_manager_admin_login
+    find(:xpath, '//*[@id="mdlive-nav"]/div/div[2]/ul/li[6]/a').click
+    click_link('Manage 271 Patients Data')
+    click_link('UnRegistered Patients Data')
+    click_link('Add UnRegistered Patient Data')
+    select 'Automation BCBSIL Primary', from: 'select_hets_template'
+    click_on('Submit')
+
+end
