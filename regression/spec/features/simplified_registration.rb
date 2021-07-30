@@ -50,4 +50,37 @@ describe 'Next registration' do
             expect(page).to have_content(first_name.capitalize)
         end
     end
+
+    context 'When affiliation is CSV' do
+        let(:first_name){ "test#{rand(1..10000)}"}
+        let(:last_name){"test#{rand(1..10000)}"}
+        let(:day){"#{rand(1..30)}"}
+        let(:year){"#{rand(1910..2000)}"}
+        let(:month){"#{([*1..12] - [2]).sample}"}
+        let(:dob){"#{month}/#{day}/#{year}"}
+        let(:gender){'Male'}
+        let(:aff_name){'mdl'}
+        let(:zip){'33325'}
+        let(:unique_id){"test#{rand(1000..99999)}"}
+        let(:email){'mgarcia@mdlive.com'}
+        let(:password){'mdlive123'}
+        let(:member_id){"#{unique_id}"}
+
+        it 'should register successfully' do
+            eligible_members_endpoint
+            visit('/register')
+            fill_in("Email", with: email)
+            fill_in('Password', with: password)
+            find('#dobMonth').find(:xpath, "//*[@id='dobMonth']/option[#{month.to_i+1}]").click
+            fill_in('Day', with: day)
+            fill_in('Year', with: year)
+            click_on('Create account')
+            fill_in("First Name", with: first_name)
+            fill_in("Last Name", with: last_name)
+            find(:xpath, '//*[@id="__next"]/main/div/div/form/div[2]/label[2]/div/div').click
+            fill_in("What's your home ZIP code?", with: zip)
+            click_on('Submit')
+            expect(page).to have_content(first_name.capitalize)
+        end
+    end
 end
