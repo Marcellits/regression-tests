@@ -3,7 +3,7 @@ def roberta_login
 end
 
 def aff_manager_admin_login
-    login_aff_manager('qateam@mdlive.com','Mdlive123$$$$$')
+    login_aff_manager('qateam@mdlive.com','Mdlive123$$$$$$')
 end
 
 def conehealth_user_login
