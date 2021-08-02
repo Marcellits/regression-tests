@@ -76,4 +76,32 @@ describe 'Next registration on Landing Pages' do
             expect(page).to have_content(first_name.capitalize)
         end
     end
+
+    context 'When affiliation is Hybrid' do
+        let(:first_name){ "test#{rand(1..10000)}"}
+        let(:last_name){"test#{rand(1..10000)}"}
+        let(:day){"#{rand(1..31)}"}
+        let(:year){"#{rand(1910..2000)}"}
+        let(:dob){"03/#{day}/#{year}"}
+        let(:gender){'male'}
+        let(:aff_name){'bcbsil'}
+        let(:zip){'33325'}
+        let(:unique_id){"test#{rand(1000..99999)}"}
+        let(:email){'mgarcia@mdlive.com'}
+        let(:password){'mdlive123'}
+
+        it 'should register user successfully' do
+            visit('https://stage.mdlive.com/en/bcbsil/register/monikers')
+            eligible_members_endpoint
+            fill_in('Insurance Member ID', with: unique_id)
+            select 'March', from: 'dobMonth'
+            fill_in('Day', with: day)
+            fill_in('Year', with: year)
+            click_on('Continue')
+            fill_in("What's your email?", with: email)
+            fill_in('Create a password', with: password)
+            click_on('Create account')
+            expect(page).to have_content('Who needs help today?')
+        end
+    end
 end
