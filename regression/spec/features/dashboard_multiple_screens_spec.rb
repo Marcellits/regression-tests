@@ -7,7 +7,7 @@ describe "Dashboard multiple screens section" do
         #known dtc has all services available
         it 'should display all cards' do
             visit('/sign-in')
-            roberta_login
+            login_port(ROBERTA)
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label[2]/img').click
             expect(page).to have_content('Urgent Care'&& 'Wellness Visit' && 'Therapist' && 'Psychiatrist' && 'Dermatologist')
         end
@@ -17,7 +17,7 @@ describe "Dashboard multiple screens section" do
         #known Molina is BH only
         it 'should display only therapy and psychiatry cards' do
             visit('/sign-in')
-            molina_user_login
+            login_port(MOLINA_USER)
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label/img').click
             expect(page).to have_content('Psychiatrist' && 'Therapist') 
         end
@@ -27,7 +27,7 @@ describe "Dashboard multiple screens section" do
         #known Avmed doesn't have dermatology enabled
         it 'should display all services except dermatology' do
             visit('/sign-in')
-            avmed_user_login
+            login_port(AVMED_USER)
             click_on('Confirm')
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label[1]/img').click
             expect(page).to have_no_content('Dermatologist') 
@@ -38,7 +38,7 @@ describe "Dashboard multiple screens section" do
         #known Avmed doesn't have PC nor A.W. enabled
         it 'should display all services except Annual Wellness' do
             visit('/sign-in')
-            avmed_user_login
+            login_port(AVMED_USER)
             click_on('Confirm')
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label[1]/img').click
             expect(page).to have_no_content('Primary Care' && 'Wellness Visit') 
@@ -49,7 +49,7 @@ describe "Dashboard multiple screens section" do
         #known Cone Health doesn't have annual wellness set in stage
         it 'should display Primary Care card' do
             visit('/sign-in')
-            conehealth_user_login
+            login_port(CONEHEALTH_USER)
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label/img').click
             expect(page).to have_content('Primary Care') && have_no_content('Wellness Visit')
         end
@@ -72,7 +72,7 @@ describe "Dashboard multiple screens section" do
             therapy_recurring_price = find('#product_recurring_therapy_price').value.to_i
             derm_price =find('#product_derm_consult_price').value.to_i
             visit('/sign-in')
-            mdlive_user_login
+            login_port(MDLIVE_USER)
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label[1]/img').click
             urgent_care_card_price = (find(:xpath, "//*[@id='price_for_provider_type_3']/b").text)[1..-1].to_i
             therapy_card_price = (find(:xpath, "//*[@id='price_for_provider_type_5']/b").text)[1..-1].to_i
@@ -96,7 +96,7 @@ describe "Dashboard multiple screens section" do
             therapy_price = find('#affiliation_therapy_charge_amount').value.to_i
             derm_price =find('#affiliation_dermatology_charge_amount').value.to_i
             visit('/sign-in')
-            geha_user_login
+            login_port(GEHA_USER) 
             click_on('Confirm')
             find(:xpath, '//*[@id="legacyLayoutApplication"]/div[2]/div/div/div[2]/section/label/img').click
             urgent_care_card_price = (find(:xpath, "//*[@id='price_for_provider_type_3']/b").text)[1..-1].to_i
