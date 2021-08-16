@@ -13,7 +13,8 @@ feature 'Login Page: Validate Page Elements' do
      end
 
     scenario 'User log in succesfully' do 
-        roberta_login 
+        login_port(ROBERTA) 
+        
         expect(page).to have_content('Who needs help today?')
         expect(page).to have_content ('Roberta')
     end

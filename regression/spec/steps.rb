@@ -1,6 +1,6 @@
-def login_port(username, password)
-    fill_in('Username', with: username)
-    fill_in('Password', with: password)
+def login_port(user)
+    fill_in('Username', with: user[:username])
+    fill_in('Password', with: user[:password])
     click_on 'Sign in'
 end
 

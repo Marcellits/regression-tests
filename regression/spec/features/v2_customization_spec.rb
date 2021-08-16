@@ -13,7 +13,7 @@ feature "Affiliation's Customization" do
         click_link('Org Params')
         primary_color = page.find(:xpath, '//*[@id="org-param-65139"]/td[2]').text
         visit('/sign-in')
-        conehealth_user_login
+        login_port(CONEHEALTH_USER)
         background_color = page.find(:xpath, '/html/body/div[4]').native.css_value('background')
         if background_color.include? 'rgb(0, 153, 170)'
             background_color = '#0099aa'
@@ -30,7 +30,7 @@ feature "Affiliation's Customization" do
         click_link('Affiliation Images')
         image_link = page.find(:xpath, '//*[@id="affiliation-image-2286"]/td[2]').text
         visit('/sign-in')
-        conehealth_user_login
+        login_port(CONEHEALTH_USER)
         logo_port = page.find(:xpath, '//*[@id="affiliationLogo"]')['src']
         expect(logo_port).to eq(image_link)
     end

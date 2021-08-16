@@ -1,26 +1,36 @@
-def roberta_login
-    login_port('robertafake', 'mdlive2020')
-end
-
 def aff_manager_admin_login
     login_aff_manager('qateam@mdlive.com','Mdlive123$$$$$$')
 end
 
-def conehealth_user_login
-    login_port('testconeuser', 'mdlive789')
-end
+ROBERTA = {
+    username: 'robertafake',
+    password: 'mdlive2020'
+}
 
-def molina_user_login
-    login_port('testmolina01','mdlive123')
-end
+CONEHEALTH_USER = {
+    username: 'testconeuser',
+    password: 'mdlive789'
+}
 
-def avmed_user_login
-    login_port('avmedpatient', 'mdlive123')
-end
+MOLINA_USER = {
+    username: 'testmolina01',
+    password: 'mdlive123'
+}
 
-def mdlive_user_login
-    login_port('Carolsanford', 'mdlive123')
-end
+AVMED_USER = {
+    username: 'avmedpatient',
+    password: 'mdlive123'
+}
+
+MDLIVE_USER = {
+    username: 'Carolsanford',
+    password: 'mdlive123'
+}
+
+GEHA_USER = {
+    username: 'rsailor01',
+    password: 'mdlive123!'
+}
 
 def geha_user_login
     login_port('rsailor01', 'mdlive123!')
