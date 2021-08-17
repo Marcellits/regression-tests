@@ -6,7 +6,7 @@ require_relative '../pws.rb'
 feature "Affiliation's Customization" do
     scenario 'When Affiliation has customized color', requires: [:css] do 
         visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
-        aff_manager_admin_login
+        login_aff_manager(AFF_MANAGER_ADMIN)
         fill_in('affiliation-search-field', with: 'conehealth')
         click_on('Search')
         click_on('Actions')
@@ -23,7 +23,7 @@ feature "Affiliation's Customization" do
 
     scenario 'When Affiliation has logo added' do
         visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
-        aff_manager_admin_login
+        login_aff_manager(AFF_MANAGER_ADMIN)
         fill_in('affiliation-search-field', with: 'conehealth')
         click_on('Search')
         click_on('Actions')

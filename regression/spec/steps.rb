@@ -4,15 +4,15 @@ def login_port(user)
     click_on 'Sign in'
 end
 
-def login_aff_manager(email, password)
-    fill_in('Email', with: email)
-    fill_in('Password', with: password)
+def login_aff_manager(user)
+    fill_in('Email', with: user[:username])
+    fill_in('Password', with: user[:password])
     click_on 'Log in'
 end
 
 def aff_manager_search(affiliation)
     visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
-    aff_manager_admin_login
+    login_aff_manager(AFF_MANAGER_ADMIN)
     find(:xpath, '//*[@id="select-search"]/option[2]').click
     fill_in('affiliation-search-field', with: affiliation)
     click_on('Search')
@@ -31,7 +31,12 @@ def eligible_members_endpoint
           "unique_id": unique_id
         }
     })
-    p JSON.parse(response)
+    
+    if response[:status] = 201 
+        p "Eligible member record created"
+    else
+        response.status
+    end
 end
 
 def hash_month_names(month)
@@ -54,7 +59,7 @@ end
 
 def generate_mock_270
     visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
-    aff_manager_admin_login
+    login_aff_manager(AFF_MANAGER_ADMIN)
     find(:xpath, '//*[@id="mdlive-nav"]/div/div[2]/ul/li[6]/a').click
     click_link('Manage 271 Patients Data')
     click_link('UnRegistered Patients Data')
@@ -66,12 +71,11 @@ end
 
 def generate_mock_270_bcbsil
     visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
-    aff_manager_admin_login
+    login_aff_manager(AFF_MANAGER_ADMIN)
     find(:xpath, '//*[@id="mdlive-nav"]/div/div[2]/ul/li[6]/a').click
     click_link('Manage 271 Patients Data')
     click_link('UnRegistered Patients Data')
     click_link('Add UnRegistered Patient Data')
     select 'Automation BCBSIL Primary', from: 'select_hets_template'
     click_on('Submit')
-
 end
