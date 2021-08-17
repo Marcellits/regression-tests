@@ -3,12 +3,7 @@
 require 'bundler'
 require 'capybara/dsl'
 require 'capybara/rspec'
-require 'dotenv'
-Dotenv.load(
-  '.env.local',
-  '.env.test',
-  '.env'
-)
+
 
 Bundler.setup(:default)
 Bundler.require
@@ -20,9 +15,11 @@ Bundler.require
 # :selenium_chrome_headless # Selenium driving Chrome in a headless configuration
 # https://github.com/teamcapybara/capybara#selenium
 
-Capybara.default_driver = :selenium_chrome
+Capybara.default_driver = :selenium_chrome_headless
 Capybara.app_host = 'https://stage.mdlive.com'
-Capybara.default_max_wait_time = 20
+Capybara.default_max_wait_time = 10
+
+
 
 # Run using:
 # bundle exec rspec spec/features/login.rb --format documentation
