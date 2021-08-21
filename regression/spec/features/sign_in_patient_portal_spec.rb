@@ -13,9 +13,9 @@ feature 'Login Page: Validate Page Elements' do
      end
 
     scenario 'User log in succesfully' do 
-        login_port(ROBERTA) 
+        login_port(MDLIVE_USER) 
         
         expect(page).to have_content('Who needs help today?')
-        expect(page).to have_content ('Roberta')
+        expect(page).to have_content ('Carol')
     end
 end    

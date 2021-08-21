@@ -4,7 +4,7 @@ require_relative '../pws.rb'
 
 
 feature "Affiliation's Customization" do
-    scenario 'When Affiliation has customized color', requires: [:css] do 
+    scenario 'When Affiliation has customized color' do 
         visit('https://stage-af.mdlive.com/affiliation_configurators/sign_in')
         login_aff_manager(AFF_MANAGER_ADMIN)
         fill_in('affiliation-search-field', with: 'conehealth')
@@ -31,7 +31,7 @@ feature "Affiliation's Customization" do
         image_link = page.find(:xpath, '//*[@id="affiliation-image-2286"]/td[2]').text
         visit('/sign-in')
         login_port(CONEHEALTH_USER)
-        logo_port = page.find(:xpath, '//*[@id="affiliationLogo"]')['src']
+        logo_port = page.find(:xpath, '//*[@id="affiliationLogo"]', visible: false)['src']
         expect(logo_port).to eq(image_link)
     end
 end    
