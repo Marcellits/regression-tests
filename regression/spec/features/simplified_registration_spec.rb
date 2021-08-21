@@ -74,7 +74,7 @@ describe 'Next registration' do
             find('#dobMonth').find(:xpath, "//*[@id='dobMonth']/option[#{month.to_i+1}]").click
             fill_in('Day', with: day)
             fill_in('Year', with: year)
-            click_on('Create account')
+            click_on('Create account', wait:10)
             fill_in("First Name", with: first_name)
             fill_in("Last Name", with: last_name)
             find(:xpath, '//*[@id="__next"]/main/div/div/form/div[2]/label[2]/div/div').click

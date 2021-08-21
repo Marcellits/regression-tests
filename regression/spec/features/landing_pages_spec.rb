@@ -97,7 +97,7 @@ describe 'Next registration on Landing Pages' do
             select 'March', from: 'dobMonth'
             fill_in('Day', with: day)
             fill_in('Year', with: year)
-            click_on('Continue')
+            click_on('Continue', wait:10)
             fill_in("What's your email?", with: email)
             fill_in('Create a password', with: password)
             click_on('Create account')
