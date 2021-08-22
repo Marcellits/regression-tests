@@ -14,8 +14,6 @@ feature 'Login Page: Validate Page Elements' do
 
     scenario 'User log in succesfully' do 
         login_port(MDLIVE_USER) 
-        
-        expect(page).to have_content('Who needs help today?')
-        expect(page).to have_content ('Carol')
+        expect(page).to have_content("#{(MDLIVE_USER[:first_name]).capitalize}")
     end
 end    

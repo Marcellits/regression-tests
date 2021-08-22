@@ -1,3 +1,20 @@
+CSV_ELIGIBLE_MEMBER = {
+    first_name: "test#{rand(1..10000)}",
+    last_name: "test#{rand(1..10000)}",
+    day: "#{rand(1..30)}",
+    year: "#{rand(1910..2000)}",
+    month: "#{([*1..12] - [2]).sample}",
+    gender: 'Male',
+    aff_name:'mdl',
+    zip: '33325',
+    unique_id: "test_unique_id#{rand(1000..99999)}",
+    email: 'qateam@mdlive.com',
+    password: 'mdlive123',
+    #member_id: "#{:unique_id}"
+}
+
+
+
 def login_port(user)
     fill_in('Username', with: user[:username])
     fill_in('Password', with: user[:password])
@@ -19,21 +36,21 @@ def aff_manager_search(affiliation)
 end
 
 
-def eligible_members_endpoint
+def eligible_members_endpoint(eligible_member)
     response = HTTP.post('https://stage-app.mdlive.com/qa/eligible_members', :json => {
         "eligible_member": {
-          "first_name": first_name,
-          "last_name": last_name,
-          "birthdate": dob,
-          "gender": gender,
-          "zip": zip,
-          "affiliation_name": aff_name,
-          "unique_id": unique_id
+          "first_name": eligible_member[:first_name],
+          "last_name": eligible_member[:last_name],
+          "birthdate": "#{eligible_member[:month]}/#{eligible_member[:day]}/#{eligible_member[:year]}",
+          "gender": eligible_member[:gender],
+          "zip": eligible_member[:zip],
+          "affiliation_name": eligible_member[:aff_name],
+          "unique_id": eligible_member[:unique_id]
         }
     })
-    
     if response[:status] = 201 
-        p "Eligible member record created"
+        p "Eligible member record created" 
+        p JSON.parse(response)
     else
         response.status
     end

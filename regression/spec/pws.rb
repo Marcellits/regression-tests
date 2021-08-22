@@ -29,7 +29,8 @@ AVMED_USER = {
 
 MDLIVE_USER = {
     username: 'Carolsanford',
-    password: 'mdlive123'
+    password: 'mdlive123',
+    first_name: 'Carol'
 }
 
 GEHA_USER = {

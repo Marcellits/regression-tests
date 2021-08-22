@@ -17,7 +17,7 @@ describe 'Next registration on Landing Pages' do
             member_id = find(:xpath, '/html/body/div/p[3]').text.split(' ')[2]
             gender = find(:xpath, '/html/body/div/p[4]').text.split(' ')[1]
             zip = '33325'
-            email = 'mgarcia@mdlive.com'
+            email = 'qateam@mdlive.com'
             password = 'mdlive123' 
             
             visit('https://stage.mdlive.com/en/bcbsil-mmai/register')
@@ -48,60 +48,39 @@ describe 'Next registration on Landing Pages' do
     end
 
     context 'When affiliation is CSV' do
-        let(:first_name){ "test#{rand(1..10000)}"}
-        let(:last_name){"test#{rand(1..10000)}"}
-        let(:day){"#{rand(1..31)}"}
-        let(:year){"#{rand(1910..2000)}"}
-        let(:dob){"03/#{day}/#{year}"}
-        let(:gender){'male'}
-        let(:aff_name){'mdl'}
-        let(:zip){'33325'}
-        let(:unique_id){"test#{rand(1000..99999)}"}
-        let(:email){'mgarcia@mdlive.com'}
-        let(:password){'mdlive123'}
-
         it 'should register successfully' do
-            eligible_members_endpoint
+            eligible_member = CSV_ELIGIBLE_MEMBER
+            eligible_members_endpoint(eligible_member)
             visit('https://stage.mdlive.com/en/surveymonkey/register')
-            fill_in("What's your email?", with: email)
-            fill_in('Create a password', with: password)
-            fill_in("What's your first name?", with: first_name)
-            fill_in("What's your last name?", with: last_name)
+            fill_in("What's your email?", with: eligible_member[:email])
+            fill_in('Create a password', with: eligible_member[:password])
+            fill_in("What's your first name?", with: eligible_member[:first_name])
+            fill_in("What's your last name?", with: eligible_member[:last_name])
             find(:xpath, '//*[@id="__next"]/div[2]/main/div/div/form/div[4]/div/label[2]/div/div').click
-            select 'March', from: 'dobMonth'
-            fill_in('Day', with: day)
-            fill_in('Year', with: year)
-            fill_in("What's your home ZIP code?", with: zip)
+            find('#dobMonth').find(:xpath, "//*[@id='dobMonth']/option[#{eligible_member[:month].to_i+1}]").click
+            fill_in('Day', with: eligible_member[:day])
+            fill_in('Year', with: eligible_member[:year])
+            fill_in("What's your home ZIP code?", with: eligible_member[:zip])
             click_on('Create account')
-            expect(page).to have_content(first_name.capitalize)
+            expect(page).to have_content(eligible_member[:first_name].capitalize)
         end
     end
 
     context 'When affiliation is Hybrid' do
-        let(:first_name){ "test#{rand(1..10000)}"}
-        let(:last_name){"test#{rand(1..10000)}"}
-        let(:day){"#{rand(1..31)}"}
-        let(:year){"#{rand(1910..2000)}"}
-        let(:dob){"03/#{day}/#{year}"}
-        let(:gender){'male'}
-        let(:aff_name){'bcbsil'}
-        let(:zip){'33325'}
-        let(:unique_id){"test#{rand(1000..99999)}"}
-        let(:email){'mgarcia@mdlive.com'}
-        let(:password){'mdlive123'}
-
         it 'should register user successfully' do
             visit('https://stage.mdlive.com/en/bcbsil/register/monikers')
-            eligible_members_endpoint
-            fill_in('Insurance Member ID', with: unique_id)
-            select 'March', from: 'dobMonth'
-            fill_in('Day', with: day)
-            fill_in('Year', with: year)
-            click_on('Continue', wait:10)
-            fill_in("What's your email?", with: email)
-            fill_in('Create a password', with: password)
+            eligible_member = CSV_ELIGIBLE_MEMBER
+            eligible_member[:aff_name] = 'bcbsil' #known as hybrid affiliation
+            eligible_members_endpoint(eligible_member)
+            fill_in('Insurance Member ID', with: eligible_member[:unique_id])
+            find('#dobMonth').find(:xpath, "//*[@id='dobMonth']/option[#{eligible_member[:month].to_i+1}]").click
+            fill_in('Day', with: eligible_member[:day])
+            fill_in('Year', with: eligible_member[:year])
+            click_on('Continue')
+            fill_in("What's your email?", with: eligible_member[:email])
+            fill_in('Create a password', with: eligible_member[:password])
             click_on('Create account')
-            expect(page).to have_content('Who needs help today?')
+            expect(page).to have_content(eligible_member[:first_name].capitalize)
         end
     end
 end
