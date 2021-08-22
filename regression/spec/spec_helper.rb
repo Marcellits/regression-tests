@@ -7,7 +7,7 @@ Bundler.require
 
 Capybara.default_driver = :selenium_chrome_headless
 Capybara.app_host = 'https://stage.mdlive.com'
-Capybara.default_max_wait_time = 10
+Capybara.default_max_wait_time = 20
 
 # Run using:
 # bundle exec rspec spec/features/<file>.rb

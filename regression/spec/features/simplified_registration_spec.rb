@@ -17,7 +17,7 @@ describe 'Next registration' do
             member_id = find(:xpath, '/html/body/div/p[3]').text.split(' ')[2]
             gender = find(:xpath, '/html/body/div/p[4]').text.split(' ')[1]
             zip = '33325'
-            email = 'mgarcia@mdlive.com'
+            email = 'qateam@mdlive.com'
             password = 'mdlive123' 
             visit('/register')
             fill_in("Email", with: email)
@@ -52,35 +52,22 @@ describe 'Next registration' do
     end
 
     context 'When affiliation is CSV' do
-        let(:first_name){ "test#{rand(1..10000)}"}
-        let(:last_name){"test#{rand(1..10000)}"}
-        let(:day){"#{rand(1..30)}"}
-        let(:year){"#{rand(1910..2000)}"}
-        let(:month){"#{([*1..12] - [2]).sample}"}
-        let(:dob){"#{month}/#{day}/#{year}"}
-        let(:gender){'Male'}
-        let(:aff_name){'mdl'}
-        let(:zip){'33325'}
-        let(:unique_id){"test#{rand(1000..99999)}"}
-        let(:email){'mgarcia@mdlive.com'}
-        let(:password){'mdlive123'}
-        let(:member_id){"#{unique_id}"}
-
         it 'should register successfully' do
-            eligible_members_endpoint
+            eligible_member = CSV_ELIGIBLE_MEMBER
+            eligible_members_endpoint(eligible_member)
             visit('/register')
-            fill_in("Email", with: email)
-            fill_in('Password', with: password)
-            find('#dobMonth').find(:xpath, "//*[@id='dobMonth']/option[#{month.to_i+1}]").click
-            fill_in('Day', with: day)
-            fill_in('Year', with: year)
-            click_on('Create account', wait:10)
-            fill_in("First Name", with: first_name)
-            fill_in("Last Name", with: last_name)
+            fill_in("Email", with: eligible_member[:email])
+            fill_in('Password', with: eligible_member[:password])
+            find('#dobMonth').find(:xpath, "//*[@id='dobMonth']/option[#{eligible_member[:month].to_i+1}]").click
+            fill_in('Day', with: eligible_member[:day])
+            fill_in('Year', with: eligible_member[:year])
+            click_on('Create account')
+            fill_in("First Name", with: eligible_member[:first_name]) 
+            fill_in("Last Name", with: eligible_member[:last_name])
             find(:xpath, '//*[@id="__next"]/main/div/div/form/div[2]/label[2]/div/div').click
-            fill_in("What's your home ZIP code?", with: zip)
+            fill_in("What's your home ZIP code?", with: eligible_member[:zip])
             click_on('Submit')
-            expect(page).to have_content(first_name.capitalize)
+            expect(page).to have_content(eligible_member[:first_name].capitalize)
         end
     end
 end
