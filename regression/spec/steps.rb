@@ -13,7 +13,20 @@ CSV_ELIGIBLE_MEMBER = {
     #member_id: "#{:unique_id}"
 }
 
-
+CSV_BCBSIL_ELIGIBLE_MEMBER = {
+    first_name: "test#{rand(1..10000)}",
+    last_name: "test#{rand(1..10000)}",
+    day: "#{rand(1..30)}",
+    year: "#{rand(1910..2000)}",
+    month: "#{([*1..12] - [2]).sample}",
+    gender: 'Male',
+    aff_name:'bcbsil',
+    zip: '33325',
+    unique_id: "test_unique_id#{rand(1000..99999)}",
+    email: 'qateam@mdlive.com',
+    password: 'mdlive123',
+    #member_id: "#{:unique_id}"
+} 
 
 def login_port(user)
     fill_in('Username', with: user[:username])

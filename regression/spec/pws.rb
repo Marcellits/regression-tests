@@ -1,10 +1,6 @@
-def aff_manager_admin_login
-    login_aff_manager('qateam@mdlive.com','Mdlive123$$$$$$')
-end
-
 AFF_MANAGER_ADMIN = {
     username: 'qateam@mdlive.com',
-    password: 'Mdlive123$$$$$$'
+    password: 'Mdlive123#'
 }
 
 ROBERTA = {

@@ -11,10 +11,11 @@ feature "Affiliation's Customization" do
         click_on('Search')
         click_on('Actions')
         click_link('Org Params')
-        primary_color = page.find(:xpath, '//*[@id="org-param-65139"]/td[2]').text
+        primary_color_row_content = page.find('tr', text: 'primary_color').text.split(' ')
+        primary_color = primary_color_row_content[1]
         visit('/sign-in')
         login_port(CONEHEALTH_USER)
-        background_color = page.find(:xpath, '/html/body/div[4]').native.css_value('background')
+        background_color = page.find('.layout-wrapper').native.css_value('background')
         if background_color.include? 'rgb(0, 153, 170)'
             background_color = '#0099aa'
         end

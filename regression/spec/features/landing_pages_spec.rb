@@ -69,7 +69,7 @@ describe 'Next registration on Landing Pages' do
     context 'When affiliation is Hybrid' do
         it 'should register user successfully' do
             visit('https://stage.mdlive.com/en/bcbsil/register/monikers')
-            eligible_member = CSV_ELIGIBLE_MEMBER
+            eligible_member = CSV_BCBSIL_ELIGIBLE_MEMBER
             eligible_member[:aff_name] = 'bcbsil' #known as hybrid affiliation
             eligible_members_endpoint(eligible_member)
             fill_in('Insurance Member ID', with: eligible_member[:unique_id])
